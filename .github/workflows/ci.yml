@@ -25,4 +25,7 @@ jobs:
         run: dotnet restore EnterpriseAI.sln
 
       - name: Test
-        run: dotnet test tests/EnterpriseAI.Tests/EnterpriseAI.Tests.csproj --configuration Release --no-restore --verbosity normal
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet test tests/EnterpriseAI.Tests/EnterpriseAI.Tests.csproj --configuration Release --no-restore --verbosity normal 2>&1 | tail -n 120
