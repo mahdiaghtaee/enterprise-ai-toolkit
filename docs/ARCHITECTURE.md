@@ -1,62 +1,114 @@
-# Architecture
+# Enterprise AI Toolkit Architecture
 
-## Overview
+## Goal
 
-Enterprise AI Toolkit is organized around small, replaceable modules. Each module should expose clear contracts and avoid direct coupling to a specific AI provider, vector database, or application host.
+Enterprise AI Toolkit is designed to provide clean .NET abstractions for enterprise AI systems without coupling the application to a single model provider, vector database, or document-processing pipeline.
 
-## High-Level Layers
+The architecture favors explicit contracts, small modules, and testable boundaries.
+
+---
+
+## Core Layers
+
+### 1. Abstractions
+
+The abstractions layer defines provider-independent contracts and models.
+
+Examples:
+
+- Chat clients
+- Embedding generators
+- Vector stores
+- Document chunkers
+- Retrieval services
+- RAG pipelines
+
+This layer should remain lightweight and free from concrete vendor dependencies.
+
+### 2. Core
+
+The core layer contains reusable orchestration logic that depends on abstractions, not providers.
+
+Examples:
+
+- Request validation
+- Pipeline orchestration
+- Retry policies
+- Common result models
+- Shared domain services
+
+### 3. Providers
+
+Provider packages implement the abstractions for specific services.
+
+Examples:
+
+- OpenAI
+- Azure OpenAI
+- Ollama
+- Qdrant
+- PostgreSQL vector extensions
+
+Provider packages should be replaceable without changing application logic.
+
+### 4. RAG
+
+The RAG layer connects retrieval, ranking, prompt construction, and answer generation.
+
+A typical flow:
 
 ```text
-Applications
-  WebApi
-  Console Samples
-  Worker Samples
-
-Capabilities
-  RAG
-  Documents
-  Vector Search
-  Providers
-
-Core
-  Abstractions
-  Shared Models
-  Configuration
+User Question
+  -> Query Embedding
+  -> Vector Search
+  -> Context Selection
+  -> Prompt Construction
+  -> LLM Answer
+  -> Source Attribution
 ```
 
-## Core Principles
+### 5. Documents
 
-### Provider Independence
-Application code should depend on interfaces instead of direct SDK implementations.
+The document layer handles ingestion and preparation for retrieval.
 
-### Replaceable Storage
-Vector store and metadata storage should be replaceable through abstractions.
-
-### Runnable Examples
-Each major capability should include at least one small runnable example.
-
-### Testable Design
-Contracts and services should be easy to test without external services.
-
-## Planned Projects
+A typical flow:
 
 ```text
-EnterpriseAI.Abstractions
-EnterpriseAI.Core
-EnterpriseAI.Providers.OpenAI
-EnterpriseAI.Providers.Ollama
-EnterpriseAI.VectorStores.Qdrant
-EnterpriseAI.RAG
-EnterpriseAI.Documents
-EnterpriseAI.WebApi
+Document Upload
+  -> Text Extraction
+  -> Chunking
+  -> Metadata Assignment
+  -> Embedding Generation
+  -> Vector Storage
 ```
+
+---
+
+## Design Rules
+
+- Application code should depend on abstractions, not provider SDKs.
+- Tests should be able to run without external AI providers.
+- Provider implementations should be replaceable.
+- RAG responses should support source attribution.
+- Samples should remain small and runnable.
+- Production features should be introduced behind clear interfaces.
+
+---
 
 ## v0.1 Architecture Scope
 
 The first milestone focuses only on:
-- Core models
-- Provider contracts
-- Embedding contracts
-- A minimal sample
 
-The goal is to keep the first version small and maintainable.
+- Core chat abstractions
+- Request and response models
+- Testable provider contracts
+- A minimal runnable sample
+- CI validation for build and tests
+
+The goal is to keep the first version small, understandable, and maintainable.
+
+---
+
+## Portfolio Message
+
+This architecture demonstrates enterprise-ready AI backend thinking: separation of concerns, provider independence, testability, and a clear path from demo to production.
