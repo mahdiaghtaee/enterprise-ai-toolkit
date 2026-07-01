@@ -1,7 +1,6 @@
-using System.Threading;
-using System.Threading.Tasks;
-using EnterpriseAI.Abstractions;
-using EnterpriseAI.Core;
+using System.Collections.Generic;
+using EnterpriseAI.Abstractions.Chat;
+using EnterpriseAI.Core.Chat;
 using Xunit;
 
 namespace EnterpriseAI.Tests;
@@ -9,35 +8,36 @@ namespace EnterpriseAI.Tests;
 public sealed class ChatAbstractionTests
 {
     [Fact]
-    public void Chat_request_preserves_prompt()
+    public void Chat_request_preserves_messages_and_model()
     {
-        var request = new ChatRequest("Summarize this document.");
+        var request = new ChatRequest(
+            new List<ChatMessage>
+            {
+                new(ChatRole.User, "Summarize this document.")
+            },
+            "test-model");
 
-        Assert.Equal("Summarize this document.", request.Prompt);
+        Assert.Single(request.Messages);
+        Assert.Equal(ChatRole.User, request.Messages[0].Role);
+        Assert.Equal("Summarize this document.", request.Messages[0].Content);
+        Assert.Equal("test-model", request.Model);
     }
 
     [Fact]
-    public async Task Chat_client_contract_can_be_implemented_without_external_provider()
+    public void In_memory_chat_provider_returns_echo_response_without_external_provider()
     {
-        IChatClient client = new FakeChatClient("Test response");
+        var provider = new InMemoryChatProvider();
+        var request = new ChatRequest(
+            new List<ChatMessage>
+            {
+                new(ChatRole.User, "Hello")
+            },
+            "test-model");
 
-        var response = await client.CompleteAsync("Hello");
+        var response = provider.CreateReply(request);
 
-        Assert.Equal("Test response", response);
-    }
-
-    private sealed class FakeChatClient : IChatClient
-    {
-        private readonly string _response;
-
-        public FakeChatClient(string response)
-        {
-            _response = response;
-        }
-
-        public Task<string> CompleteAsync(string prompt, CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult(_response);
-        }
+        Assert.Equal(ChatRole.Assistant, response.Message.Role);
+        Assert.Equal("Echo: Hello", response.Message.Content);
+        Assert.Equal("test-model", response.Model);
     }
 }
