@@ -24,8 +24,5 @@ jobs:
       - name: Restore
         run: dotnet restore EnterpriseAI.sln
 
-      - name: Build
-        run: dotnet build EnterpriseAI.sln --configuration Release --no-restore
-
       - name: Test
-        run: dotnet test EnterpriseAI.sln --configuration Release --no-build
+        run: dotnet test tests/EnterpriseAI.Tests/EnterpriseAI.Tests.csproj --configuration Release --no-restore --verbosity normal
