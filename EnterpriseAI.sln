@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseAI.Core", "src\En
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterpriseAI.Tests", "tests\EnterpriseAI.Tests\EnterpriseAI.Tests.csproj", "{34701A73-6CB2-40DB-A061-49B0663E1B2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSample", "examples\ConsoleSample\ConsoleSample.csproj", "{5D3AF570-7457-4D2B-B7F0-8CDE7E1606B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{34701A73-6CB2-40DB-A061-49B0663E1B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34701A73-6CB2-40DB-A061-49B0663E1B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34701A73-6CB2-40DB-A061-49B0663E1B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3AF570-7457-4D2B-B7F0-8CDE7E1606B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3AF570-7457-4D2B-B7F0-8CDE7E1606B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3AF570-7457-4D2B-B7F0-8CDE7E1606B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3AF570-7457-4D2B-B7F0-8CDE7E1606B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
