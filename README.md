@@ -1,145 +1,122 @@
 # Enterprise AI Toolkit
 
-![.NET](https://img.shields.io/badge/.NET-8.0-blue)
-![Architecture](https://img.shields.io/badge/Architecture-Provider--Agnostic-blue)
-![RAG](https://img.shields.io/badge/RAG-Ready-orange)
-![Status](https://img.shields.io/badge/status-early--foundation-orange)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
+[![Status](https://img.shields.io/badge/status-early--foundation-orange)](#current-status)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-A modular .NET toolkit for building enterprise AI applications with clean abstractions for LLMs, embeddings, RAG pipelines, vector search, document processing, and production-ready architecture patterns.
+An early .NET foundation for experimenting with provider-independent AI contracts.
 
-This repository is designed as a portfolio-grade foundation for enterprise AI engineering: small, composable, testable, and provider-independent.
+The repository currently contains a small solution structure, initial chat abstractions and models, an in-memory provider, a runnable console sample, tests, and CI. It does **not** yet contain a complete RAG pipeline, document-processing implementation, production provider integration, or deployable application framework.
 
----
+## Current Purpose
 
-## Problem
+The project explores how to define small, testable contracts before adding vendor-specific SDKs. It is intended to grow through implemented examples rather than a large speculative API surface.
 
-Many enterprise AI projects start as tightly coupled demos: one provider, one prompt, one database, and no clear path to production.
+Current focus:
 
-That makes the system hard to test, hard to replace, hard to scale, and risky for businesses that need long-term maintainability.
+- chat request and response contracts;
+- provider-independent interfaces;
+- an in-memory implementation for deterministic examples and tests;
+- a minimal console sample;
+- restore, build, and test validation in GitHub Actions.
 
----
+## Run the Sample
 
-## Solution
+```bash
+dotnet run --project examples/ConsoleSample/ConsoleSample.csproj
+```
 
-Enterprise AI Toolkit provides a .NET-first foundation for building AI features with clean boundaries:
+The sample uses the in-memory provider and requires no API key or external service.
 
-- LLM provider abstractions
-- Embedding provider abstractions
-- Retrieval and RAG contracts
-- Document ingestion interfaces
-- Vector store abstractions
-- Testable core services
-- Runnable examples and implementation guidance
+## Run the Tests
 
-The goal is not to hide AI behind a large framework. The goal is to make enterprise AI systems easier to structure, test, replace, and evolve.
+```bash
+dotnet test EnterpriseAI.sln --configuration Release
+```
 
----
-
-## Target Use Cases
-
-- Document question answering with RAG
-- Enterprise search over internal knowledge bases
-- Provider-agnostic LLM integrations
-- Embedding and vector search workflows
-- AI assistants connected to business systems
-- Document ingestion and semantic retrieval
-- Backend foundations for AI-enabled SaaS products
-
----
-
-## Planned Architecture
+## Repository Structure
 
 ```text
 src/
-  EnterpriseAI.Abstractions/        Core contracts and request/response models
-  EnterpriseAI.Core/                Shared orchestration and reusable logic
-  EnterpriseAI.Providers.OpenAI/    Future provider implementation
-  EnterpriseAI.Providers.Ollama/    Future local model provider implementation
-  EnterpriseAI.VectorStores.Qdrant/ Future vector database integration
-  EnterpriseAI.RAG/                 Retrieval and answer generation pipeline
-  EnterpriseAI.Documents/           Document ingestion and chunking abstractions
-  EnterpriseAI.WebApi/              Optional API hosting layer
+  EnterpriseAI.Abstractions/   Initial contracts and models
+  EnterpriseAI.Core/           Current reusable implementation code
 
 tests/
-  EnterpriseAI.Tests/               Unit and contract tests
+  EnterpriseAI.Tests/          Unit and contract tests
 
 examples/
-  ConsoleSample/                    Minimal runnable sample
+  ConsoleSample/               Minimal runnable example
 
 docs/
-  Architecture and usage notes
+  Architecture and design notes
 ```
 
----
+The structure should be updated only when corresponding projects and implementations exist.
 
-## Engineering Principles
+## Design Principles
 
-- Provider-agnostic design
-- Clean and testable abstractions
-- Small modules over large frameworks
-- Practical samples over theoretical examples
-- Production-oriented structure
-- Explicit contracts before provider implementations
-- Test-first foundations for AI backend services
-
----
+- keep contracts small and justified by a runnable use case;
+- preserve deterministic fake or in-memory providers for tests;
+- avoid coupling shared abstractions to one vendor SDK;
+- add tests with each public behavior;
+- document implemented behavior separately from planned work;
+- prefer extracting reusable code from working applications over designing a framework in advance.
 
 ## Roadmap
 
-### v0.1 - Foundations
+### v0.1 — Chat Foundation
 
-- Define core chat abstraction
-- Add request and response models
-- Add minimal console sample
-- Add unit test foundation
-- Add CI workflow for build and tests
-- Document architecture decisions
+Current work:
 
-### v0.2 - RAG Basics
+- core chat abstraction;
+- request and response models;
+- in-memory provider;
+- console sample;
+- unit tests and CI.
 
-- Add document chunking contracts
-- Add embedding request and response models
-- Add vector store abstraction
-- Add simple retrieval sample
-- Add fake providers for tests
+### v0.2 — Retrieval Contracts
 
-### v0.3 - Documents
+Planned only after the first contracts are stable:
 
-- Add document ingestion abstractions
-- Add PDF and text ingestion examples
-- Add metadata model
-- Add document search sample
-- Add source attribution model
+- embedding request and response models;
+- vector-store contracts;
+- deterministic retrieval example;
+- fake providers for tests;
+- documented error and cancellation behavior.
 
----
+### v0.3 — Document Example
 
-## Portfolio Value
+Planned:
 
-This project demonstrates:
+- document-ingestion contracts justified by a runnable sample;
+- text chunking example;
+- source-attribution models;
+- a small end-to-end retrieval demonstration.
 
-- Senior-level .NET architecture
-- Enterprise AI system design
-- Clean abstraction boundaries
-- RAG-ready backend thinking
-- Provider-independent engineering
-- Testable AI application foundations
+## Explicitly Not Implemented
 
-It complements [`enterprise-ai-document-assistant`](https://github.com/mahdiaghtaee/enterprise-ai-document-assistant), which is a concrete enterprise document assistant backend.
+The current repository does not claim to provide:
 
----
+- production-ready architecture;
+- complete RAG orchestration;
+- PDF or OCR ingestion;
+- OpenAI, Ollama, Qdrant, or other provider packages;
+- authentication, authorization, persistence, observability, or deployment guidance;
+- performance or quality benchmarks.
+
+Those capabilities should be documented as implemented only after code and tests are added.
+
+## Relationship to Enterprise AI Document Assistant
+
+[`enterprise-ai-document-assistant`](https://github.com/mahdiaghtaee/enterprise-ai-document-assistant) is the concrete application. This toolkit should receive reusable abstractions only when they have been validated by a working implementation or a focused example.
 
 ## Current Status
 
-Early foundation stage. The first development milestone is `v0.1`, focused on project structure, abstractions, one runnable sample, and CI/test credibility.
+Early foundation stage. The repository is useful for reviewing the initial .NET contracts, sample, and test approach, but it is not a finished framework or production package.
 
----
+## Contributing
 
-## Author
-
-Built by [Mahdi Aghtaee](https://github.com/mahdiaghtaee) as part of an enterprise AI and .NET backend portfolio.
-
----
+Contributions should stay small and include a runnable example or test demonstrating why a new abstraction is needed.
 
 ## License
 
