@@ -14,14 +14,15 @@ The architecture favors explicit contracts, small modules, and testable boundari
 
 The abstractions layer defines provider-independent contracts and models.
 
-Examples:
+Implemented now:
 
-- Chat clients
-- Embedding generators
-- Vector stores
-- Document chunkers
-- Retrieval services
-- RAG pipelines
+- Chat request/response models and provider-neutral chat boundaries
+- `IEmbeddingGenerator`
+- `EmbeddingInput`, `EmbeddingRequest`, `EmbeddingVector`, and `EmbeddingResponse`
+
+The embedding contract supports one or more inputs, preserves caller-defined identifiers, reports vector dimensions explicitly, and accepts cancellation without depending on a vendor SDK.
+
+Planned boundaries such as vector stores, document chunkers, retrieval services, and RAG orchestration should be added only when justified by a runnable use case.
 
 This layer should remain lightweight and free from concrete vendor dependencies.
 
@@ -29,13 +30,12 @@ This layer should remain lightweight and free from concrete vendor dependencies.
 
 The core layer contains reusable orchestration logic that depends on abstractions, not providers.
 
-Examples:
+Implemented now:
 
-- Request validation
-- Pipeline orchestration
-- Retry policies
-- Common result models
-- Shared domain services
+- deterministic in-memory chat behavior;
+- deterministic SHA-256-derived embedding generation for examples and tests.
+
+Future orchestration, retry policies, common result models, and shared domain services should be added only when there is implemented behavior that requires them.
 
 ### 3. Providers
 
@@ -95,17 +95,17 @@ Document Upload
 
 ---
 
-## v0.1 Architecture Scope
+## Current Architecture Scope
 
-The first milestone focuses only on:
+The implemented reusable surface is intentionally small:
 
-- Core chat abstractions
-- Request and response models
-- Testable provider contracts
-- A minimal runnable sample
-- CI validation for build and tests
+- chat abstractions and models;
+- provider-independent embedding contracts and models;
+- deterministic chat and embedding implementations for tests/examples;
+- a minimal runnable chat sample;
+- CI validation for build and tests.
 
-The goal is to keep the first version small, understandable, and maintainable.
+Vector-store contracts, provider SDK adapters, RAG orchestration, and document ingestion remain future work. The goal is to grow the toolkit from proven use cases instead of publishing a speculative framework surface.
 
 ---
 
