@@ -1,57 +1,48 @@
 # Roadmap
 
-## v0.1 - Foundations
+## v0.1 - Chat Foundations
 
-Goal: Establish the project structure and core contracts.
+Goal: Establish the project structure and a small provider-independent chat boundary.
 
-Deliverables:
+Completed:
 - Solution structure
-- Core abstractions
-- LLM provider contracts
-- Embedding provider contracts
+- Chat request/response models
+- In-memory chat provider
 - Minimal console sample
-- Initial tests
+- Unit tests and CI
 
-## v0.2 - RAG Basics
+## v0.2 - Retrieval Contracts
 
-Goal: Provide a simple retrieval-augmented generation pipeline.
+Goal: Introduce only the reusable contracts needed for deterministic retrieval foundations.
 
-Deliverables:
-- Document chunking contracts
-- Embedding pipeline
-- Vector store abstraction
-- Qdrant integration prototype
-- Retrieval sample
+Completed:
+- Provider-independent embedding generator contract
+- Single and multi-input embedding request/response models
+- Stable input-to-output identifier mapping
+- Explicit vector dimensions
+- Deterministic local embedding provider
+- Cancellation and validation tests
 
-## v0.3 - Document Ingestion
+Remaining:
+- Vector-store abstraction justified by a runnable use case
+- Deterministic retrieval example
+- Error behavior for retrieval/storage boundaries
+- Documentation for the completed retrieval path
 
-Goal: Add document-focused workflows.
+## v0.3 - Document Example
 
-Deliverables:
-- Text ingestion
-- PDF ingestion placeholder
-- Metadata model
-- Search result model
-- Document search sample
+Goal: Add document-focused contracts only after the retrieval boundary is proven.
 
-## v0.4 - API Layer
+Planned:
+- Document-ingestion contracts justified by a runnable sample
+- Text chunking example
+- Source-attribution models
+- Small end-to-end retrieval demonstration
 
-Goal: Expose core capabilities through an ASP.NET Core API.
+## Later Milestones
 
-Deliverables:
-- Minimal API project
-- Swagger
-- Health endpoint
-- RAG query endpoint
-- Basic configuration model
+Potential provider packages, ASP.NET Core APIs, persistence, observability, and deployment guidance remain intentionally uncommitted until corresponding implementations and tests exist.
 
-## v1.0 - Portfolio Release
+## Release Principle
 
-Goal: Publish a stable and presentable release.
-
-Deliverables:
-- Runnable examples
-- CI pipeline
-- Tests
-- Architecture documentation
-- Release notes
+A capability is documented as implemented only when code, tests, and a reviewable example or contract exist. Production-readiness claims are out of scope for the current toolkit.
