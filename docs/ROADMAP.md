@@ -1,48 +1,40 @@
 # Roadmap
 
-## v0.1 - Chat Foundations
+## v0.1 - Chat Foundations — Completed
 
-Goal: Establish the project structure and a small provider-independent chat boundary.
+Delivered:
+- solution structure;
+- provider-independent chat request/response models;
+- in-memory chat provider;
+- minimal console sample;
+- unit tests and CI.
 
-Completed:
-- Solution structure
-- Chat request/response models
-- In-memory chat provider
-- Minimal console sample
-- Unit tests and CI
+## v0.2 - Chat and Embedding Foundation — Completed
 
-## v0.2 - Retrieval Contracts
+Delivered:
+- provider-independent embedding generator contract;
+- single and multi-input embedding request/response models;
+- stable input-to-output identifier mapping;
+- explicit vector dimensions;
+- deterministic SHA-256-based local embedding provider;
+- cancellation and validation tests;
+- runnable sample and CI validation.
 
-Goal: Introduce only the reusable contracts needed for deterministic retrieval foundations.
+## Maintenance boundary
 
-Completed:
-- Provider-independent embedding generator contract
-- Single and multi-input embedding request/response models
-- Stable input-to-output identifier mapping
-- Explicit vector dimensions
-- Deterministic local embedding provider
-- Cancellation and validation tests
+The repository is in maintenance mode after v0.2.0. No active feature milestone is currently planned.
 
-Remaining:
-- Vector-store abstraction justified by a runnable use case
-- Deterministic retrieval example
-- Error behavior for retrieval/storage boundaries
-- Documentation for the completed retrieval path
+The following are deliberately deferred rather than partially implemented:
 
-## v0.3 - Document Example
+- vector-store abstractions;
+- retrieval orchestration;
+- provider SDK adapters;
+- document-ingestion contracts;
+- text chunking and source-attribution examples;
+- ASP.NET Core hosting, persistence, observability, and deployment guidance.
 
-Goal: Add document-focused contracts only after the retrieval boundary is proven.
+These items should be added only if the toolkit is intentionally resumed and a concrete, testable use case justifies the public surface.
 
-Planned:
-- Document-ingestion contracts justified by a runnable sample
-- Text chunking example
-- Source-attribution models
-- Small end-to-end retrieval demonstration
+## Release principle
 
-## Later Milestones
-
-Potential provider packages, ASP.NET Core APIs, persistence, observability, and deployment guidance remain intentionally uncommitted until corresponding implementations and tests exist.
-
-## Release Principle
-
-A capability is documented as implemented only when code, tests, and a reviewable example or contract exist. Production-readiness claims are out of scope for the current toolkit.
+A capability is documented as implemented only when code, tests, and a reviewable example or contract exist. Production-readiness claims remain out of scope.

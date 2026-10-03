@@ -1,10 +1,12 @@
 # Enterprise AI Toolkit
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
-[![Status](https://img.shields.io/badge/status-early--foundation-orange)](#current-status)
+[![Status](https://img.shields.io/badge/status-stable--foundation-blue)](#current-status)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-An early .NET foundation for experimenting with provider-independent AI contracts.
+> **Project status:** Stable foundation in maintenance mode. Active feature development is paused after v0.2.0; future work is intentionally deferred until the toolkit is resumed.
+
+A stable .NET foundation for provider-independent chat and embedding contracts.
 
 The repository currently contains a small solution structure, chat abstractions and models, provider-independent embedding contracts, deterministic in-memory/local providers, a runnable console sample, tests, and CI. It does **not** yet contain a vector-store abstraction, complete RAG pipeline, document-processing implementation, production provider integration, or deployable application framework.
 
@@ -75,25 +77,20 @@ Current work:
 - console sample;
 - unit tests and CI.
 
-### v0.2 — Retrieval Contracts
+### v0.2 — Embedding Foundation
 
-In progress, with the embedding boundary now implemented:
+Completed:
 
 - provider-independent embedding generator contract;
 - single/multi-input request and response models with stable input identifiers;
 - explicit vector dimensions;
 - deterministic SHA-256-based local embedding provider for tests and examples;
 - cancellation and invalid-dimension coverage;
-- vector-store contracts and a deterministic retrieval example remain planned.
+- the v0.2 scope intentionally stops at the embedding boundary; vector-store and retrieval orchestration work is deferred.
 
-### v0.3 — Document Example
+### Deferred work
 
-Planned:
-
-- document-ingestion contracts justified by a runnable sample;
-- text chunking example;
-- source-attribution models;
-- a small end-to-end retrieval demonstration.
+Vector-store contracts, retrieval orchestration, provider SDK adapters, document-ingestion contracts, text chunking, and source-attribution examples are deferred until the project is intentionally resumed.
 
 ## Explicitly Not Implemented
 
@@ -114,7 +111,7 @@ Those capabilities should be documented as implemented only after code and tests
 
 ## Current Status
 
-Early foundation stage. The repository is useful for reviewing the .NET chat and embedding contracts, deterministic providers, sample, and test approach, but it is not a finished framework or production package.
+Stable foundation / maintenance mode. The v0.2 line is the completed scope for the current development cycle: provider-independent chat and embedding contracts, deterministic providers, sample code, tests, and CI. It is not a production framework; broader retrieval, provider, document, and deployment work is intentionally deferred.
 
 ## Contributing
 
