@@ -6,7 +6,7 @@
 
 An early .NET foundation for experimenting with provider-independent AI contracts.
 
-The repository currently contains a small solution structure, initial chat abstractions and models, an in-memory provider, a runnable console sample, tests, and CI. It does **not** yet contain a complete RAG pipeline, document-processing implementation, production provider integration, or deployable application framework.
+The repository currently contains a small solution structure, chat abstractions and models, provider-independent embedding contracts, deterministic in-memory/local providers, a runnable console sample, tests, and CI. It does **not** yet contain a vector-store abstraction, complete RAG pipeline, document-processing implementation, production provider integration, or deployable application framework.
 
 ## Current Purpose
 
@@ -15,8 +15,9 @@ The project explores how to define small, testable contracts before adding vendo
 Current focus:
 
 - chat request and response contracts;
-- provider-independent interfaces;
-- an in-memory implementation for deterministic examples and tests;
+- provider-independent chat and embedding interfaces;
+- embedding request/response models that preserve caller identifiers and vector dimensions;
+- deterministic local implementations for examples and tests;
 - a minimal console sample;
 - restore, build, and test validation in GitHub Actions.
 
@@ -76,13 +77,14 @@ Current work:
 
 ### v0.2 — Retrieval Contracts
 
-Planned only after the first contracts are stable:
+In progress, with the embedding boundary now implemented:
 
-- embedding request and response models;
-- vector-store contracts;
-- deterministic retrieval example;
-- fake providers for tests;
-- documented error and cancellation behavior.
+- provider-independent embedding generator contract;
+- single/multi-input request and response models with stable input identifiers;
+- explicit vector dimensions;
+- deterministic SHA-256-based local embedding provider for tests and examples;
+- cancellation and invalid-dimension coverage;
+- vector-store contracts and a deterministic retrieval example remain planned.
 
 ### v0.3 — Document Example
 
@@ -112,7 +114,7 @@ Those capabilities should be documented as implemented only after code and tests
 
 ## Current Status
 
-Early foundation stage. The repository is useful for reviewing the initial .NET contracts, sample, and test approach, but it is not a finished framework or production package.
+Early foundation stage. The repository is useful for reviewing the .NET chat and embedding contracts, deterministic providers, sample, and test approach, but it is not a finished framework or production package.
 
 ## Contributing
 
